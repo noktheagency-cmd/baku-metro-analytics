@@ -1,0 +1,254 @@
+[
+  {
+    "year": 1990,
+    "passengers": 167.4,
+    "stations": 18,
+    "length": 28.0,
+    "wagons": 222
+  },
+  {
+    "year": 1991,
+    "passengers": 160.7,
+    "stations": 18,
+    "length": 28.5,
+    "wagons": 233
+  },
+  {
+    "year": 1992,
+    "passengers": 137.0,
+    "stations": 18,
+    "length": 28.5,
+    "wagons": 243
+  },
+  {
+    "year": 1993,
+    "passengers": 124.5,
+    "stations": 19,
+    "length": 28.5,
+    "wagons": 243
+  },
+  {
+    "year": 1994,
+    "passengers": 162.0,
+    "stations": 19,
+    "length": 28.5,
+    "wagons": 240
+  },
+  {
+    "year": 1995,
+    "passengers": 150.0,
+    "stations": 19,
+    "length": 28.5,
+    "wagons": 225
+  },
+  {
+    "year": 1996,
+    "passengers": 171.6,
+    "stations": 19,
+    "length": 28.0,
+    "wagons": 219
+  },
+  {
+    "year": 1997,
+    "passengers": 159.5,
+    "stations": 19,
+    "length": 28.5,
+    "wagons": 219
+  },
+  {
+    "year": 1998,
+    "passengers": 143.8,
+    "stations": 19,
+    "length": 28.5,
+    "wagons": 217
+  },
+  {
+    "year": 1999,
+    "passengers": 119.2,
+    "stations": 19,
+    "length": 28.5,
+    "wagons": 217
+  },
+  {
+    "year": 2000,
+    "passengers": 117.4,
+    "stations": 19,
+    "length": 28.5,
+    "wagons": 212
+  },
+  {
+    "year": 2001,
+    "passengers": 119.3,
+    "stations": 19,
+    "length": 28.5,
+    "wagons": 212
+  },
+  {
+    "year": 2002,
+    "passengers": 115.6,
+    "stations": 19,
+    "length": 28.5,
+    "wagons": 237
+  },
+  {
+    "year": 2003,
+    "passengers": 127.0,
+    "stations": 20,
+    "length": 29.9,
+    "wagons": 257
+  },
+  {
+    "year": 2004,
+    "passengers": 136.9,
+    "stations": 20,
+    "length": 29.9,
+    "wagons": 269
+  },
+  {
+    "year": 2005,
+    "passengers": 147.0,
+    "stations": 20,
+    "length": 29.9,
+    "wagons": 269
+  },
+  {
+    "year": 2006,
+    "passengers": 161.0,
+    "stations": 20,
+    "length": 29.9,
+    "wagons": 237
+  },
+  {
+    "year": 2007,
+    "passengers": 176.0,
+    "stations": 20,
+    "length": 29.9,
+    "wagons": 244
+  },
+  {
+    "year": 2008,
+    "passengers": 200.4,
+    "stations": 21,
+    "length": 31.5,
+    "wagons": 274
+  },
+  {
+    "year": 2009,
+    "passengers": 206.1,
+    "stations": 22,
+    "length": 31.5,
+    "wagons": 269
+  },
+  {
+    "year": 2010,
+    "passengers": 181.1,
+    "stations": 22,
+    "length": 31.5,
+    "wagons": 251
+  },
+  {
+    "year": 2011,
+    "passengers": 182.6,
+    "stations": 23,
+    "length": 34.6,
+    "wagons": 266
+  },
+  {
+    "year": 2012,
+    "passengers": 195.6,
+    "stations": 23,
+    "length": 34.6,
+    "wagons": 266
+  },
+  {
+    "year": 2013,
+    "passengers": 206.6,
+    "stations": 23,
+    "length": 34.6,
+    "wagons": 266
+  },
+  {
+    "year": 2014,
+    "passengers": 215.5,
+    "stations": 23,
+    "length": 34.6,
+    "wagons": 265
+  },
+  {
+    "year": 2015,
+    "passengers": 222.0,
+    "stations": 23,
+    "length": 34.6,
+    "wagons": 280
+  },
+  {
+    "year": 2016,
+    "passengers": 217.5,
+    "stations": 25,
+    "length": 36.6,
+    "wagons": 280
+  },
+  {
+    "year": 2017,
+    "passengers": 228.8,
+    "stations": 25,
+    "length": 36.6,
+    "wagons": 280
+  },
+  {
+    "year": 2018,
+    "passengers": 231.0,
+    "stations": 25,
+    "length": 36.6,
+    "wagons": 286
+  },
+  {
+    "year": 2019,
+    "passengers": 236.7,
+    "stations": 25,
+    "length": 36.6,
+    "wagons": 295
+  },
+  {
+    "year": 2020,
+    "passengers": 74.7,
+    "stations": 25,
+    "length": 36.6,
+    "wagons": 304
+  },
+  {
+    "year": 2021,
+    "passengers": 90.2,
+    "stations": 26,
+    "length": 38.3,
+    "wagons": 319
+  },
+  {
+    "year": 2022,
+    "passengers": 208.7,
+    "stations": 27,
+    "length": 40.7,
+    "wagons": 314
+  },
+  {
+    "year": 2023,
+    "passengers": 219.5,
+    "stations": 27,
+    "length": 40.7,
+    "wagons": 321
+  },
+  {
+    "year": 2024,
+    "passengers": 230.0,
+    "stations": 27,
+    "length": 40.7,
+    "wagons": 351
+  },
+  {
+    "year": 2025,
+    "passengers": 226.8,
+    "stations": 27,
+    "length": 40.7,
+    "wagons": 376
+  }
+]

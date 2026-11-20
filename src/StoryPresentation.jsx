@@ -1,0 +1,30 @@
+import Select from './Select';
+import React,{useState,useEffect,useRef} from 'react';
+import {Play,Pause,ChevronLeft,ChevronRight,Maximize,Minimize} from 'lucide-react';
+import data from './data.json';
+import {PresentationCurve} from './AnimatedTrend';
+import {scenes} from './scenes';
+const fmt=n=>new Intl.NumberFormat('az-AZ',{maximumFractionDigits:1}).format(n);
+function Count({value,reduced}){const [display,setDisplay]=useState(value);const current=useRef(value);useEffect(()=>{if(reduced){current.current=value;setDisplay(value);return}const from=current.current;let frame;const start=performance.now();const tick=now=>{const t=Math.min((now-start)/1000,1);current.current=from+(value-from)*(1-Math.pow(1-t,3));setDisplay(current.current);if(t<1)frame=requestAnimationFrame(tick)};frame=requestAnimationFrame(tick);return()=>cancelAnimationFrame(frame)},[value,reduced]);return <>{fmt(display)}</>}
+export default function StoryPresentation(){
+ const [index,setIndex]=useState(0),[playing,setPlaying]=useState(false),[duration,setDuration]=useState(4500),[progress,setProgress]=useState(0),[wide,setWide]=useState(false),[reduced,setReduced]=useState(()=>matchMedia('(prefers-reduced-motion: reduce)').matches);
+ useEffect(()=>{if(!wide)return;const previous=document.body.style.overflow;document.body.style.overflow='hidden';const escape=e=>{if(e.key==='Escape')setWide(false)};window.addEventListener('keydown',escape);return()=>{document.body.style.overflow=previous;window.removeEventListener('keydown',escape)}},[wide]);
+ const elapsed=useRef(0),stage=useRef(null);const r=data[index],prev=data[index-1],scene=scenes[Math.floor(index/3)%scenes.length];
+ useEffect(()=>{const mq=matchMedia('(prefers-reduced-motion: reduce)');const change=()=>setReduced(mq.matches);mq.addEventListener('change',change);return()=>mq.removeEventListener('change',change)},[]);
+ useEffect(()=>{elapsed.current=0;setProgress(0)},[index,duration]);
+ useEffect(()=>{if(!playing)return;let frame,last=performance.now();const tick=now=>{if(!document.hidden){elapsed.current+=now-last;setProgress(Math.min(elapsed.current/duration,1));if(elapsed.current>=duration){elapsed.current=0;if(index===data.length-1){setPlaying(false);setProgress(1);return}setIndex(i=>i+1);return}}last=now;frame=requestAnimationFrame(tick)};frame=requestAnimationFrame(tick);return()=>cancelAnimationFrame(frame)},[playing,index,duration]);
+ useEffect(()=>{const n=new Image();n.src=`/images/${scenes[Math.floor(Math.min(index+3,35)/3)%scenes.length].image}.png`},[index]);
+ const seek=n=>{setPlaying(false);setIndex(Math.min(Math.max(n,0),35));elapsed.current=0;setProgress(0)};
+ const toggle=()=>{if(index===35){setIndex(0);elapsed.current=0}setPlaying(p=>!p)};
+ const chapter=r.year<2000?'İlk onilliyin izləri':r.year<2010?'Yeni minilliyin ritmi':r.year<2020?'Böyüyən şəbəkə':r.year<2022?'Kəskin dəyişiklik illəri':'Son illərin mənzərəsi';
+ return <div className={`page-enter presentation ${wide?'presentation-wide':''}`}><div className="section-intro"><h2>İllərin hekayəsi</h2></div><div className="presentation-shell" ref={stage}>
+ <section className={`cinema-stage ${playing?'is-playing':''}`} style={{'--slide-time':`${duration*3}ms`}} aria-label="İllərin təqdimatı">
+ <div className="cinema-images">{scenes.map(s=><img key={s.image} className={s.image===scene.image?'visible':''} src={`/images/${s.image}.png`} alt={s.image===scene.image?s.alt:''} loading={s.image===scene.image?'eager':'lazy'} aria-hidden={s.image!==scene.image}/>)}</div>
+ <div className="cinema-top"><span>{chapter}</span><button aria-label={wide?'Təqdimatı kiçilt':'Təqdimatı genişləndir'} onClick={()=>setWide(v=>!v)}>{wide?<Minimize size={19}/>:<Maximize size={19}/>}</button></div>
+ <div className="cinema-body"><div className="cinema-year" key={r.year}>{r.year}</div><div className="cinema-value"><Count value={r.passengers} reduced={reduced}/><span>milyon gediş</span></div><p className="cinema-change" key={`delta-${r.year}`}>{prev?`${fmt((r.passengers-prev.passengers)/prev.passengers*100)}% · əvvəlki ilə nisbətən`:'Açıq məlumat sırasının başlanğıcı'}</p><div className="cinema-metrics"><div><strong><Count value={r.stations} reduced={true}/></strong><span>stansiya</span></div><div><strong><Count value={r.length} reduced={reduced}/></strong><span>km xətt</span></div><div><strong><Count value={r.wagons} reduced={true}/></strong><span>vaqon</span></div></div></div>
+ <div className="cinema-chart"><span>Sərnişin daşınması · 1990–2025</span><PresentationCurve data={data} index={index}/></div>
+ <div className="slide-progress"><span style={{transform:`scaleX(${progress})`}}/></div>
+ </section>
+ <div className="presentation-controls"><div className="play-group"><button aria-label="Əvvəlki il" disabled={index===0} onClick={()=>seek(index-1)}><ChevronLeft size={21}/></button><button className="main-play" aria-label={playing?'Nümayişi dayandır':'İlləri oynat'} onClick={toggle}>{playing?<Pause size={21}/>:<Play size={21}/>}</button><button aria-label="Növbəti il" disabled={index===35} onClick={()=>seek(index+1)}><ChevronRight size={21}/></button></div><label className="year-slider">İl <strong>{r.year}</strong><input aria-label="Hekayə ili" type="range" min="0" max="35" value={index} onChange={e=>seek(+e.target.value)}/><span>2025</span></label><label className="speed-select">Temp<Select aria-label="Təqdimat tempi" value={duration} onChange={e=>setDuration(+e.target.value)}><option value={6500}>Rahat · 6,5 san</option><option value={4500}>Normal · 4,5 san</option><option value={2500}>Sürətli · 2,5 san</option></Select></label></div></div>
+ <div className="year-chips">{[1990,2000,2010,2019,2020,2022,2025].map(y=><button key={y} className={r.year===y?'selected':''} onClick={()=>seek(y-1990)}>{y}</button>)}</div><div className="panel story-context"><h2>Rəqəmlərin arxasındakı kontekst</h2><p>Göstəricilər Dövlət Statistika Komitəsinin illik məlumatlarıdır. Hərəkətli sayğac yalnız keçid effektidir; dayandıqda seçilmiş ilin dəqiq qiymətini göstərir. Xətt uzunluğu qoşa xətt hesabı ilə verilir.</p></div></div>
+}
